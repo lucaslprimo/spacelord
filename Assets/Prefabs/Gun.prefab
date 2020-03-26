@@ -77,14 +77,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 5234819559811642427, guid: f681190a777986b488f5d81d59ca5c1c,
     type: 3}
-  defaultWeapon: {fileID: 9174309015559002739}
   shootingPosition: {fileID: 9174309015453780389}
-  shotRate: 3
+  shotRate: 2
   weaponName: Regular Laser Pistol
   maxBullets: 0
-  bulletsLabel: {fileID: 0}
-  inifiniteLabel: {fileID: 0}
-  gunName: {fileID: 0}
 --- !u!1 &9174309016954331801
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +126,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -141,6 +138,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

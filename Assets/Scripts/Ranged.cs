@@ -17,6 +17,7 @@ public class Ranged : Enemy
         {
             Quaternion rotationCorrection = Quaternion.AngleAxis(90, Vector3.forward);
             Instantiate(projectile, shootingPosition.position, rotation * rotationCorrection);
+
             attackTime = Time.time + 1 / attackRate;
         }
     }
