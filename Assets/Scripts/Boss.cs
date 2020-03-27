@@ -61,6 +61,11 @@ public class Boss : Being
         Instantiate(explosion, transform.position, transform.rotation);
         Instantiate(explosionSound, transform.position, transform.rotation);
         base.Die();
+
+        foreach(ProjectileBoss projectile in GameObject.FindObjectsOfType<ProjectileBoss>())
+        {
+            Destroy(projectile.gameObject);
+        }
     }
 
     public override void UpdateHealth(int newHealth)

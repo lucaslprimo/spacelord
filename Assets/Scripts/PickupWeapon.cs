@@ -8,9 +8,11 @@ public class PickupWeapon : MonoBehaviour
     public GameObject sound;
     public float lifetime;
     private float deadTime;
+    private Animator anim;
 
     private void Start()
     {
+        anim = gameObject.GetComponent<Animator>();
         deadTime = Time.time + lifetime;
     }
 
@@ -19,6 +21,13 @@ public class PickupWeapon : MonoBehaviour
         if (Time.time >= deadTime)
         {
             Destroy(gameObject);
+        }
+        else
+        {
+            if (deadTime - Time.time <= 2)
+            {
+                anim.SetBool("vanishing", true);
+            }
         }
     }
 

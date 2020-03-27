@@ -75,6 +75,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -86,6 +87,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -160,6 +162,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -171,6 +174,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -255,9 +259,11 @@ MonoBehaviour:
   - {fileID: 5389738406305417511, guid: 09b86fb705244b94ca7cb9d165816860, type: 3}
   player: {fileID: 0}
   stopDistance: 60
-  explosion: {fileID: 2389708815060011467, guid: c20b8aeaf1d54f84fac30627b5821789,
+  explosion: {fileID: 2046151461198124278, guid: 92191407a2c505b4b83eb4fd45ef09ab,
     type: 3}
   explosionSound: {fileID: 2116902585465721353, guid: 4c69721c737cd124f987c68c11f1b945,
+    type: 3}
+  explosionDamage: {fileID: 7965078052629153970, guid: 27eb4d10322a8c144a81522a158eb43f,
     type: 3}
   projectile: {fileID: 6497839079127247196, guid: 0c018e44c93c04a45af9628ea346a77f,
     type: 3}
