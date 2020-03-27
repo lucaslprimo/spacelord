@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : Being
@@ -22,6 +23,20 @@ public class Player : Being
     private AudioSource jetpackSound;
     public ParticleSystem particleSystemJetpack;
 
+    public FloatingJoystick mobileMovementControl;
+
+    private bool IsMobile
+    {
+        get
+        {
+            #if UNITY_ANDROID
+                return true;
+            #else
+                return false;
+            #endif
+        }
+    }
+
     public override void Start()
     {
         base.Start();
@@ -29,18 +44,35 @@ public class Player : Being
         body = GetComponent<Rigidbody2D>();
         animCamera = Camera.main.GetComponent<Animator>();
         jetpackSound = GetComponent<AudioSource>();
+
+        if (IsMobile)
+        {
+            mobileMovementControl.enabled = true;
+        }
     }
 
     private void Update()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxis(HORIZONTAL), Input.GetAxis(VERTICAL));
-        moveAmmount = moveInput.normalized * speed;
+        Vector2 moveInput;
+        if (!IsMobile)
+        {
+            moveInput = GetMovementInputMobilePC();
+        }
+        else
+        {
+            moveInput = GetMovementInputMobile();
+        }
 
+        HandleMovementInput(moveInput);
+    }
+
+    private void HandleMovementInput(Vector2 moveInput)
+    {
         if (moveInput != Vector2.zero)
         {
             particleSystemJetpack.startLifetime = 5;
 
-            if(!jetpackSound.isPlaying)
+            if (!jetpackSound.isPlaying)
                 jetpackSound.Play();
 
             if (moveInput.x != 0)
@@ -83,6 +115,22 @@ public class Player : Being
             animator.SetBool(GOING_RIGHT, false);
             animator.SetBool(GOING_LEFT, false);
         }
+    }
+
+    private Vector2 GetMovementInputMobile()
+    {
+        Vector2 moveInput = new Vector2(mobileMovementControl.Horizontal, mobileMovementControl.Vertical);
+        moveAmmount = moveInput.normalized * speed;
+
+        return moveInput; 
+    }
+
+    private Vector2 GetMovementInputMobilePC()
+    {
+        Vector2 moveInput = new Vector2(Input.GetAxis(HORIZONTAL), Input.GetAxis(VERTICAL));
+        moveAmmount = moveInput.normalized * speed;
+
+        return moveInput;
     }
 
     private void FixedUpdate()
@@ -132,8 +180,9 @@ public class Player : Being
 
     internal void EquipeWeapon(Weapon weaponToEquip)
     {
-        Transform weaponPosition  = GameObject.FindGameObjectWithTag("Weapon").transform;
+        GameObject actualWeapon  = GameObject.FindGameObjectWithTag("Weapon");
+        weaponToEquip.mobileFireControl = actualWeapon.GetComponent<Weapon>().mobileFireControl;
         Destroy(GameObject.FindGameObjectWithTag("Weapon"));
-        Instantiate(weaponToEquip, weaponPosition.position, weaponPosition.rotation, transform);
+        Instantiate(weaponToEquip, actualWeapon.transform.position, actualWeapon.transform.rotation, transform);
     }
 }
