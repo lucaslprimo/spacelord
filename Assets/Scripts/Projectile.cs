@@ -12,16 +12,28 @@ public class Projectile : MonoBehaviour
     public int damage;
     public bool massive;
 
+    public float startDelay;
+    private float startTime;
+
+
     // Start is called before the first frame update
     void Start()
     {
         Invoke("DestroyAction", lifeTime);
         Instantiate(shotSound, transform.position, transform.rotation);
+
+        startTime = Time.time + startDelay;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Time.time > startTime)
+        {
+            this.GetComponent<Collider2D>().enabled = true;
+        }
+
+
         transform.Translate(Vector3.up * Time.deltaTime * speed);
     }
 
@@ -33,17 +45,13 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if( collision.tag == "Enemy")
-        {
-            collision.GetComponent<Enemy>().TakeDamage(damage);
+        if (collision.GetComponent<Being>() != null) 
+        { 
+            collision.GetComponent<Being>().TakeDamage(damage);
             if (!massive)
             {
                 DestroyAction();
             }
-        } else if( collision.tag == "Boss")
-        {
-            collision.GetComponent<Boss>().TakeDamage(damage);
-            DestroyAction();
         }
     }
 

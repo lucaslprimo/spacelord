@@ -12,7 +12,7 @@ public class Player : Being
 
     public Image[] healthDots;
     public GameObject hurtSound;
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D body;
     private Vector2 moveAmmount;
     private Animator animator;
     private Animator animCamera;
@@ -26,7 +26,7 @@ public class Player : Being
     {
         base.Start();
         animator = GetComponent<Animator>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody2D>();
         animCamera = Camera.main.GetComponent<Animator>();
         jetpackSound = GetComponent<AudioSource>();
     }
@@ -87,8 +87,8 @@ public class Player : Being
 
     private void FixedUpdate()
     {
-        rigidbody2D.AddForce(moveAmmount * speed);
-        rigidbody2D.velocity = Vector2.ClampMagnitude(rigidbody2D.velocity, maxVelocity);
+        body.AddForce(moveAmmount * speed);
+        body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }
 
     internal void Heal(int amount)
